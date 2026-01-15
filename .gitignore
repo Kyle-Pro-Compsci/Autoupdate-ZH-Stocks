@@ -1,0 +1,6 @@
+dist/
+build/
+.ipynb_checkpoints
+__pycache__
+*.spec
+*.log
