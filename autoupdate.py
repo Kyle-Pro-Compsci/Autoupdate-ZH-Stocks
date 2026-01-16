@@ -14,6 +14,12 @@ from timestamps import Timestamps
 
 config = Config(CONFIG_PATH)
 
+ENDCELLS = [
+    "",
+    "汇总",
+    "合计",
+    None
+]
 
 # Do it separately or include it in the main iteration and check for if the database was successfully queried? How to split? Maybe keep separate to avoid the sleep timer
 def update_current_prices_group(wb: pyxl.Workbook):
@@ -30,8 +36,13 @@ def update_current_prices_group(wb: pyxl.Workbook):
     holdings_sheet = wb[config.holdings_sheet_name]
     for row in holdings_sheet.iter_rows(min_row=config.holdings_starting_row):
         price_cell = row[config.holdings_current_price_column - 1]
+        
+        if holdings_sheet.row_dimensions[price_cell.row].hidden:
+            logging.debug(f"Skipping hidden row {stock_name.row} with value {stock_name}")
+            continue
+        
         stock_name = row[config.holdings_stock_name_column - 1].value
-        if stock_name is None or stock_name == "汇总":
+        if stock_name is None or stock_name in ENDCELLS:
             logging.info("Reached end of stock list.")
             break
         try:
@@ -61,15 +72,20 @@ def update_current_prices_group(wb: pyxl.Workbook):
         
 
 def update_current_prices_individual(wb: pyxl.Workbook):
-    # Read excel file
     holdings_sheet = wb[config.holdings_sheet_name]
     
     with open(CACHE_PATH, 'r', encoding='utf-8') as file:
         stock_cache = json.load(file)
     
+    
     for row in holdings_sheet.iter_rows(min_row=config.holdings_starting_row):
         stock_name = row[config.holdings_stock_name_column - 1].value
-        if stock_name is None or stock_name == "汇总":
+        
+        if holdings_sheet.row_dimensions[stock_name.row].hidden:
+            logging.debug(f"Skipping hidden row {stock_name.row} with value {stock_name}")
+            continue
+        
+        if stock_name is None or stock_name in ENDCELLS:
             break
         
         if stock_name in stock_cache:
@@ -117,7 +133,6 @@ def update_current_prices(wb: pyxl.Workbook):
     else:
         logging.info("Group query too recent")
         update_current_prices_individual(wb)
-        
 
 
 def main():

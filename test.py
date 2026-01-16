@@ -87,8 +87,13 @@ from constants import TIMESTAMP_LOG_PATH
 
 
 # READING EXCEL DOC
-# wb = pyxl.open('短线记录.xlsx')
-# ws = wb['持仓总表']
+wb = pyxl.open('短线记录2.xlsx')
+ws = wb['持仓总表']
+
+for row in ws.iter_rows():
+    name_cell = row[1]
+    row_num = name_cell.row
+    print(f"{row_num}: Is hidden: {ws.row_dimensions[row_num].hidden}, Value: {name_cell.value}")
 
 # cell = ws.cell(1, 1)
 # print(type(cell))
@@ -165,6 +170,6 @@ from constants import TIMESTAMP_LOG_PATH
     
 # Any issue with writing with current time before attempting the call? - As long as this read write doesn't fail - should be fine - should be fine either way?
 
-a_path = Path(r'C:\Users\MyPC\AppData\Local\Programs\Python\Python314\Lib\site-packages\akshare\file_fold\*')
-print(a_path)
-print(a_path.cwd())
+# a_path = Path(r'C:\Users\MyPC\AppData\Local\Programs\Python\Python314\Lib\site-packages\akshare\file_fold\*')
+# print(a_path)
+# print(a_path.cwd())
