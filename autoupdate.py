@@ -36,12 +36,12 @@ def update_current_prices_group(wb: pyxl.Workbook):
     holdings_sheet = wb[config.holdings_sheet_name]
     for row in holdings_sheet.iter_rows(min_row=config.holdings_starting_row):
         price_cell = row[config.holdings_current_price_column - 1]
+        stock_name = row[config.holdings_stock_name_column - 1].value
         
         if holdings_sheet.row_dimensions[price_cell.row].hidden:
-            logging.debug(f"Skipping hidden row {stock_name.row} with value {stock_name}")
+            logging.debug(f"Skipping hidden row {price_cell.row}, stock name:{stock_name}")
             continue
         
-        stock_name = row[config.holdings_stock_name_column - 1].value
         if stock_name is None or stock_name in ENDCELLS:
             logging.info("Reached end of stock list.")
             break
@@ -79,10 +79,11 @@ def update_current_prices_individual(wb: pyxl.Workbook):
     
     
     for row in holdings_sheet.iter_rows(min_row=config.holdings_starting_row):
-        stock_name = row[config.holdings_stock_name_column - 1].value
+        name_cell = row[config.holdings_stock_name_column - 1]
+        stock_name = name_cell.value
         
-        if holdings_sheet.row_dimensions[stock_name.row].hidden:
-            logging.debug(f"Skipping hidden row {stock_name.row} with value {stock_name}")
+        if holdings_sheet.row_dimensions[name_cell.row].hidden:
+            logging.debug(f"Skipping hidden row {name_cell.row}, stock_name:{stock_name}")
             continue
         
         if stock_name is None or stock_name in ENDCELLS:
@@ -114,7 +115,7 @@ def update_current_prices_individual(wb: pyxl.Workbook):
             price = "ERROR"
         else:
             price = stock_utils.get_price_from_code(code, exchange)
-        row [config.holdings_current_price_column - 1].value = price
+        row[config.holdings_current_price_column - 1].value = price
         sleep(random.uniform(3,6))
 
 

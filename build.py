@@ -25,9 +25,10 @@ BUILD_CONFIG = {
     ],
     'datas': [
         ('data', 'data'),
-        (Path(r'C:\Users\MyPC\AppData\Local\Programs\Python\Python314\Lib\site-packages\akshare\file_fold\*'), Path(r'akshare/file_fold'))
+        (Path(r'C:\Users\MyPC\AppData\Local\Programs\Python\Python314\Lib\site-packages\akshare\file_fold\*'), Path(r'akshare/file_fold')),
+        ('config.json', '.')
     ]
-}
+} # Maybe should delete datas - need to take data folder and config.json out manually after building - or setup MEIPASS
 
 def build_from_config():
     cmd = ['pyinstaller']
