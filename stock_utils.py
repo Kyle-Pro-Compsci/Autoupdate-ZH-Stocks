@@ -6,7 +6,7 @@ from constants import STOCK_LIB_PATH
 def search_stocks(stock_name, json_data):
     matching_stocks = list(filter(lambda x: x["名称"] == stock_name, json_data))
     if len(matching_stocks) == 0:
-        logging.error(f"No matching stocks with stock name {stock_name} found.")
+        logging.error(f"未找到与股票名称 '{stock_name}' 匹配的股票.") #No matching stocks with stock name {} found.
         raise LookupError(f"No matching stocks with stock name {stock_name} found.")
     if len(matching_stocks) > 1:
         logging.error(f"More than one match for stock {stock_name} found")
@@ -29,7 +29,7 @@ def run_stock_individual_info_em(stock_code):
     logging.debug(f"Attempting to run ak.stock_individual_info_em({stock_code}, timeout=5)")
     result = ak.stock_individual_info_em(stock_code, timeout=5)
     stock_dict = result.set_index('item')['value'].to_dict() # result initially is a pd item value format
-    logging.info(f"Received stock {stock_code}: {stock_dict['股票简称']} and its current price of {stock_dict['最新']}")
+    logging.info(f"收到股票{stock_code}: {stock_dict['股票简称']},现价为{stock_dict['最新']}") #Received stock... and its current price
     price = stock_dict['最新']
     return price
     
@@ -39,7 +39,7 @@ def run_stock_individual_spot_xq(stock_code: str, exchange: str):
     logging.debug(f"Attempting to run ak.stock_individual_spot_xq({exchange.upper()}{stock_code}, timeout=5)")
     result = ak.stock_individual_spot_xq(f"{exchange.upper()}{stock_code}", timeout=5)
     stock_dict = result.set_index('item')['value'].to_dict()
-    logging.info(f"Received stock {stock_code}: {stock_dict['名称']} and its current price of {stock_dict['现价']} from backup xq function")
+    logging.info(f"收到股票{stock_code}: {stock_dict['名称']},现价为{stock_dict['现价']} from backup xq function")
     price = stock_dict['现价']
     return price
 

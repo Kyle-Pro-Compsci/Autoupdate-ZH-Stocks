@@ -139,31 +139,31 @@ def update_current_prices(wb: pyxl.Workbook):
 def main():
     #Create and save backup of xlsx file before modifying?
     # Read excel file
-    logging.info("Starting...") #开始。。。
+    logging.info("开始。。。") # Starting...
     xlsx_path = Path(config.xlsx_filename)
-    logging.info(f"Opening excel file {xlsx_path}") #正在打开表格文件
+    logging.info(f"正在打开表格文件 {xlsx_path}") #Opening excel file
     wb = pyxl.open(xlsx_path, read_only=False)
     
     backup_path = xlsx_path.with_stem(f"{xlsx_path.stem}_backup")
-    logging.info(f"Backing up excel file as {backup_path}") #
+    logging.info(f"正在将表格文件备份为 {backup_path}") # Backing up excel file as
     wb.save(backup_path)
     
     if config.should_update_prices:
         update_current_prices(wb)
     
-    logging.info("Updating file")
+    logging.info("正在更新文件") #Updating file
     try:
         wb.save(xlsx_path)
     except PermissionError as e:
-        logging.error("Permission error: make sure the xlsx file has write permissions")
+        logging.error("权限错误: 请确保xlsx文件可写入") #Permission error: make sure the xlsx file has write permissions
         logging.error(e)
         updated_filepath = xlsx_path.with_stem(f"{xlsx_path.stem}_updated")
-        logging.info(f"Saving to new file instead: {updated_filepath}")
+        logging.info(f"正在保存至新文件: {updated_filepath}") #Saving to new file instead:
         wb.save(updated_filepath)
     except Exception as e:
         logging.error(e)
-        logging.info("Unknown error when saving xlsx - update failed.")
-    logging.info("Execution finished.")
+        logging.info("保存xlsx时发生未知错误 - 更新失败.") #Unknown error when saving xlsx - update failed.
+    logging.info("完成.") #Execution finished.
 
 
 if __name__ == "__main__":
