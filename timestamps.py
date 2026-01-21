@@ -32,8 +32,10 @@ class Timestamps:
     
     
     def set_a_stocks_time(self):
-        self.timestamps_json[self.A_STOCKS_KEY] = datetime.now().strftime(self.TIMESTAMP_FORMAT)
+        current_time = datetime.now().strftime(self.TIMESTAMP_FORMAT)
+        self.timestamps_json[self.A_STOCKS_KEY] = current_time
         self.timestamps_json[self.FORMAT_KEY] = self.TIMESTAMP_FORMAT
+        logging.debug(f"Set timestamp to current time: {current_time}")
         self._update_json_file()
         
     

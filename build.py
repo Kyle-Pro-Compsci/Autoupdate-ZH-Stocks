@@ -10,7 +10,6 @@ config = Config(constants.CONFIG_PATH)
 
 BUILD_CONFIG = {
     'app_name': 'autoupdate',
-    'version': '0.1.0',
     'entry_point': 'autoupdate.py',
     
     'commands': [
@@ -32,7 +31,7 @@ BUILD_CONFIG = {
 
 def build_from_config():
     cmd = ['pyinstaller']
-    cmd.extend(['--name', f"{BUILD_CONFIG['app_name']}-{BUILD_CONFIG['version']}"])
+    cmd.extend(['--name', BUILD_CONFIG['app_name']])
     
     for item in BUILD_CONFIG['commands']:
         cmd.append(item)

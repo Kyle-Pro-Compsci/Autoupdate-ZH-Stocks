@@ -20,7 +20,9 @@ def update_stock_cache(cache_path, new_stock_cache):
 
 
 def query_all_a_stocks():
+    logging.info("正在获取所有的A股")
     df = ak.stock_zh_a_spot() #SinaFinance
+    logging.info("获取成功")
     df.to_json(STOCK_LIB_PATH, orient='records', indent=2, force_ascii=False)
     return df.to_dict(orient='records')
 
@@ -29,7 +31,7 @@ def run_stock_individual_info_em(stock_code):
     logging.debug(f"Attempting to run ak.stock_individual_info_em({stock_code}, timeout=5)")
     result = ak.stock_individual_info_em(stock_code, timeout=5)
     stock_dict = result.set_index('item')['value'].to_dict() # result initially is a pd item value format
-    logging.info(f"收到股票{stock_code}: {stock_dict['股票简称']},现价为{stock_dict['最新']}") #Received stock... and its current price
+    logging.info(f"收到股票{stock_code}: {stock_dict['股票简称']}, 现价为{stock_dict['最新']}") #Received stock... and its current price
     price = stock_dict['最新']
     return price
     

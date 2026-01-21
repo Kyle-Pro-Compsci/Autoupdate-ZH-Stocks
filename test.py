@@ -87,13 +87,13 @@ from constants import TIMESTAMP_LOG_PATH
 
 
 # READING EXCEL DOC
-wb = pyxl.open('短线记录2.xlsx')
-ws = wb['持仓总表']
+# wb = pyxl.open('短线记录2.xlsx')
+# ws = wb['持仓总表']
 
-for row in ws.iter_rows():
-    name_cell = row[1]
-    row_num = name_cell.row
-    print(f"{row_num}: Is hidden: {ws.row_dimensions[row_num].hidden}, Value: {name_cell.value}")
+# for row in ws.iter_rows():
+#     name_cell = row[1]
+#     row_num = name_cell.row
+#     print(f"{row_num}: Is hidden: {ws.row_dimensions[row_num].hidden}, Value: {name_cell.value}")
 
 # cell = ws.cell(1, 1)
 # print(type(cell))
@@ -137,6 +137,7 @@ for row in ws.iter_rows():
 
 # from config import Config
 # config = Config("config.json")
+# print(config.file_count())
 # xlsx_path = Path(config.xlsx_filename())
 # backup_path = xlsx_path.with_stem(f"{xlsx_path.stem}_backup")
 # print(backup_path)
@@ -173,3 +174,23 @@ for row in ws.iter_rows():
 # a_path = Path(r'C:\Users\MyPC\AppData\Local\Programs\Python\Python314\Lib\site-packages\akshare\file_fold\*')
 # print(a_path)
 # print(a_path.cwd())
+
+test_list = [
+        {
+        "文件名": "短线记录2.xlsx",
+        "目标工作表名称": "持仓总表",
+        "价格列": 7,
+        "股票名称列": 2,
+        "起始行": 3
+        },
+        {
+        "文件名": "1月19日 持 仓 汇 总.xlsx",
+        "目标工作表名称": "公司持仓汇总表",
+        "价格列": 7,
+        "股票名称列": 2,
+        "起始行": 3
+        }
+    ]
+
+for index in enumerate(test_list):
+    print(f"{index}")
