@@ -24,7 +24,7 @@ ENDCELLS = [
 # Do it separately or include it in the main iteration and check for if the database was successfully queried? How to split? Maybe keep separate to avoid the sleep timer
 def update_current_prices_group(wb: pyxl.Workbook, all_stocks, file_index):
     
-    holdings_sheet = wb[config.sheet_name()]
+    holdings_sheet = wb[config.sheet_name(file_index)]
     for row in holdings_sheet.iter_rows(min_row=config.starting_row(file_index)):
         price_cell = row[config.current_price_column(file_index) - 1]
         stock_name = row[config.stock_name_column(file_index) - 1].value

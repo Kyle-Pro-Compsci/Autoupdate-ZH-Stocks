@@ -175,22 +175,22 @@ from constants import TIMESTAMP_LOG_PATH
 # print(a_path)
 # print(a_path.cwd())
 
-test_list = [
-        {
-        "文件名": "短线记录2.xlsx",
-        "目标工作表名称": "持仓总表",
-        "价格列": 7,
-        "股票名称列": 2,
-        "起始行": 3
-        },
-        {
-        "文件名": "1月19日 持 仓 汇 总.xlsx",
-        "目标工作表名称": "公司持仓汇总表",
-        "价格列": 7,
-        "股票名称列": 2,
-        "起始行": 3
-        }
-    ]
+# test_list = [
+#         {
+#         "文件名": "短线记录2.xlsx",
+#         "目标工作表名称": "持仓总表",
+#         "价格列": 7,
+#         "股票名称列": 2,
+#         "起始行": 3
+#         },
+#         {
+#         "文件名": "1月19日 持 仓 汇 总.xlsx",
+#         "目标工作表名称": "公司持仓汇总表",
+#         "价格列": 7,
+#         "股票名称列": 2,
+#         "起始行": 3
+#         }
+#     ]
 
-for index in enumerate(test_list):
-    print(f"{index}")
+# for index in enumerate(test_list):
+#     print(f"{index}")
