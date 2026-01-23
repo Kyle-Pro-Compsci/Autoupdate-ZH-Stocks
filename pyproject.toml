@@ -1,0 +1,10 @@
+[project]
+name = "populatestocks"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "akshare>=1.18.19",
+    "openpyxl==3.1.5",
+]
