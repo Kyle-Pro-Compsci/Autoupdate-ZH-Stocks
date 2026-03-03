@@ -4,13 +4,11 @@ from src import constants
 import os
 import subprocess
 from pathlib import Path
-from src.config import Config
 
-config = Config(constants.CONFIG_PATH)
 # AFTER BUILDING : MOVE data folder and config.json from _internal to the main folder
 BUILD_CONFIG = {
     'app_name': 'autoupdate',
-    'entry_point': (Path('src/autoupdate.py')),
+    'entry_point': (Path('src/gui.py')),
     
     'commands': [
         '--onedir',
@@ -49,7 +47,5 @@ def build_from_config():
     cmd.append(f'--upx-dir={BUILD_CONFIG["UPX_path"]}')
     
     subprocess.run(cmd)
-    # print(cmd)
-    # print(cmd[-2])
     
 build_from_config()
