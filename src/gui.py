@@ -28,7 +28,7 @@ class WindowInterior(QWidget):
         bottom_layout.addWidget(self.start_button)
         bottom_layout.addWidget(self.bottom_message)
         
-        self.setWindowTitle("TestGUI")
+        self.setWindowTitle("AutoupdateInterior")
         self.setMinimumSize(700, 500)
     
     def run_process(self):

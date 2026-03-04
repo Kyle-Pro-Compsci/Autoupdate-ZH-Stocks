@@ -26,7 +26,7 @@ class HomeTab(QWidget):
         
         layout.addWidget(row_section)
         
-        save_button = QPushButton("Save Config")
+        save_button = QPushButton("保存") #配置文件
         save_button.clicked.connect(self.save_pressed)
         layout.addWidget(save_button)
         

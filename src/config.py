@@ -76,7 +76,7 @@ class Config:
     # ====Other====
     def blank_file(self):
         blank_values = {
-            "文件名": "Untitled",
+            "文件名": "无名",
             "目标工作表名称": "",
             "价格列": 0,
             "股票名称列": 0,

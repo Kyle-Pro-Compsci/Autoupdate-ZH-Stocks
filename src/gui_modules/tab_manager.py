@@ -29,7 +29,7 @@ class TabSection(QTabWidget):
         
         self.home_tab = self.set_home_tab()        
         self.tabBar().setTabsClosable(True)
-        self.addTab(self.home_tab, "Home")
+        self.addTab(self.home_tab, "主页")
         self.tabBar().setTabButton(0, QTabBar.ButtonPosition.RightSide, None)
         self.tabBar().setTabTextColor(0, "darkGreen")
         
@@ -54,7 +54,7 @@ class TabSection(QTabWidget):
         new_file = self.config.blank_file()
         file_tab = FileTab(new_file, len(self.file_tabs), parent=self)
         self.file_tabs.append(file_tab)
-        self.addTab(file_tab, "new tab")
+        self.addTab(file_tab, "新选项卡")
         #Edit config
         self.config.add_file(new_file)
         
